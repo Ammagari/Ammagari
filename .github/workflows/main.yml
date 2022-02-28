@@ -1,0 +1,29 @@
+name: workflow_performance_demo
+
+on: push
+
+jobs:
+  perftest:
+    name: job_Run performance test
+    runs-on: [ self-hosted, linux, kroger ]
+    container:
+      image: docker-prod.registry.kroger.com/perfengg/customertechnology_buildjmeterdockerimage
+
+    steps:
+    
+    - name: step_Check out code
+      uses: actions/checkout@v2
+    
+    - name: step_run jmeter command
+      run: |
+        /usr/local/apache-jmeter-5.0/bin/jmeter -JNUMBER_OF_THREADS=$NUMBER_OF_THREADS -JDURATION=$DURATION -n -t load-test/scripts/simple.jmx -l load-test/jmeter-test.log -e -o load-test/reports     
+    
+    - name: step_Upload html report
+      uses: actions/upload-artifact@v2
+      with:
+        name: html-report
+        path: load-test/
+    
+    - name: step_Analyze results
+      run: |
+        /usr/local/jmeter-test-result.sh
