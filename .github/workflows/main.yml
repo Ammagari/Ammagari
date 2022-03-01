@@ -16,7 +16,7 @@ jobs:
     
     - name: step_run jmeter command
       run: |
-        /usr/local/apache-jmeter-5.0/bin/jmeter -JNUMBER_OF_THREADS=$NUMBER_OF_THREADS -JDURATION=$DURATION -n -t load-test/scripts/simple.jmx -l load-test/jmeter-test.log -e -o load-test/reports     
+        /usr/local/apache-jmeter-5.0/bin/jmeter -JNUMBER_OF_THREADS=$NUMBER_OF_THREADS -JDURATION=$DURATION -n -t Test/simple.jmx -l Test/jmeter-test.log -e -o load-test/reports     
     
     - name: step_Upload html report
       uses: actions/upload-artifact@v2
