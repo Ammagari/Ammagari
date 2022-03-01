@@ -5,7 +5,7 @@ on: push
 jobs:
   perftest:
     name: job_Run performance test
-    runs-on: [ windows, linux, kroger ]
+    runs-on: [ self-hosted, linux, kroger ]
     container:
       image: docker-prod.registry.kroger.com/perfengg/customertechnology_buildjmeterdockerimage
 
